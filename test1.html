@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<style>
+  #dragBox {
+    width: 120px;
+    padding: 20px;
+    background: lightblue;
+    cursor: grab;
+    text-align: center;
+  }
+
+  #dropZone {
+    width: 250px;
+    height: 150px;
+    margin-top: 20px;
+    border: 2px dashed gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+
+
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+<h1>My First JavaScript</h1>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+
+<p id="demo">This text will change.</p>
+
+<!-- Add script and noscript here -->
+<script>
+document.getElementById("demo").innerHTML="Hello JavaScript!";
+</script>
+<noscript>
+JavaScript is not supported.
+</noscript>
+
+<div id="dragBox" draggable="true">
+  Drag me
+</div>
+
+<div id="dropZone">
+  Drop here
+</div>
+
+<script>
+const dragBox = document.getElementById("dragBox");
+const dropZone = document.getElementById("dropZone");
+
+dragBox.addEventListener("dragstart", (e) => {
+  e.dataTransfer.setData("id", "dragBox");
+});
+
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault(); // mandatory
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+
+  const id = e.dataTransfer.getData("id");
+  const element = document.getElementById(id);
+
+  dropZone.appendChild(element);
+});
+</script>
+
+</body>
+</html>
