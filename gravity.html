@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gravity Simulation</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+	* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #111;
+}
+
+.world {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.planet {
+    width: 40px;
+    height: 40px;
+    background: cyan;
+    border-radius: 50%;
+    position: absolute;
+}
+	</style>
+</head>
+<body>
+
+<div class="world">
+    <div id="planet" class="planet"></div>
+</div>
+
+<script src="script.js"></script>
+<script>
+const planet = document.getElementById("planet");
+
+let x = 50;
+let y = 50;
+
+let velocityX = 4;
+let velocityY = 0;
+
+let gravity = 0.3;
+
+function simulate() {
+    x += velocityX;
+    velocityY += gravity;
+    y += velocityY;
+
+    if (x > window.innerWidth) {
+        x = 0;
+    }
+
+    if (y > window.innerHeight - 40) {
+        y = window.innerHeight - 40;
+        velocityY = -velocityY * 0.7;
+    }
+
+    planet.style.left = x + "px";
+    planet.style.top = y + "px";
+
+    requestAnimationFrame(simulate);
+}
+
+simulate();
+</script>
+
+</body>
+</html>
