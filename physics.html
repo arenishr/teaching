@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Ball</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+	* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f0f0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.ball {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    left: 200px;
+    top: 50px;
+}
+	</style>
+</head>
+<body>
+
+<div class="container">
+    <div id="ball" class="ball"></div>
+</div>
+
+<script>
+const ball = document.getElementById("ball");
+
+let y = 50;
+let velocity = 0;
+let gravity = 0.5;
+let bounce = 0.8;
+
+const floor = window.innerHeight - 60;
+
+function animate() {
+    velocity += gravity;
+    y += velocity;
+
+    if (y >= floor) {
+        y = floor;
+        velocity = -velocity * bounce;
+    }
+
+    ball.style.top = y + "px";
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>
